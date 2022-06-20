@@ -1,0 +1,7 @@
+.idea
+Lib
+Scripts
+Include
+PyAudio-0.2.11-cp310-cp310-win32.whl
+pyvenv.cfg
+requirements.txt.bak
