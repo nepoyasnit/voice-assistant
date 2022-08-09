@@ -1,19 +1,11 @@
 import os
-import string
 import traceback
 import webbrowser
-
 import joblib
 import pyttsx3
 import speech_recognition
 import wikipedia
 
-
-def cleaner(x):
-    """
-    cleaning function required for neural model
-    """
-    return [a for a in (''.join([a for a in x if a not in string.punctuation])).lower().split()]
 
 class VoiceAssistant:
     """
@@ -37,13 +29,8 @@ class VoiceAssistant:
         answer = self.talk_model.predict([voice])[0]
         return answer
 
-
-
-
-
     # loading a neural model from disk
-    talk_model = joblib.load('D:\Models\model.pkl')
-
+    talk_model = joblib.load('C:/Users/lenovo/simple_chat/chat/model.pkl')
 
     def setup_assistant_voice(self):
         """
@@ -63,7 +50,6 @@ class VoiceAssistant:
             self.ttsEngine.assistant.recognition_lang = "ru-RU"
             # Microsoft Irina Desktop - Russia
             self.ttsEngine.setProperty("voice", voices[0].id)
-
 
     def search_on_wikipedia(self, *args: tuple):
         """
@@ -88,7 +74,7 @@ class VoiceAssistant:
             else:
                 # открытие ссылки на поисковик в браузере в случае, если на Wikipedia не удалось найти ничего по запросу
                 self.play_voice_assistant_speech("Can't find " + search_term + "on Wikipedia. /"
-                                                                          "But here is what I found on google")
+                                                                               "But here is what I found on google")
                 url = "https://google.com/search?q=" + search_term
                 webbrowser.get().open(url)
         except():
@@ -96,12 +82,10 @@ class VoiceAssistant:
             traceback.print_exc()
             return
 
-
     def play_voice_assistant_speech(self, text):
         # voice assistant response speech playback
         self.ttsEngine.say(str(text))
         self.ttsEngine.runAndWait()
-
 
     def record_and_recognize_audio(self):
         """
@@ -138,7 +122,6 @@ class VoiceAssistant:
 
             return recognized_data
 
-
     def video_search(self, *args: tuple):
         """
         search for a query on YouTube and open a link with answers to the query
@@ -150,7 +133,6 @@ class VoiceAssistant:
         url = "https://www.youtube.com/results?search_query=" + search_term
         webbrowser.get().open(url)
         self.play_voice_assistant_speech("Here is what I found for " + search_term + "on youtube")
-
 
     def check_commands(self, voice_input, is_work, just_talk, is_talk):
         """
@@ -174,7 +156,6 @@ class VoiceAssistant:
             is_talk = False
         return is_work, just_talk, is_talk
 
-
     def talk(self):
         """
          the function responsible for the dialog itself calls the functions of recording and speech recognition,
@@ -196,18 +177,3 @@ class VoiceAssistant:
                 assistant_answer = self.assistant_answer(voice_input)
                 self.play_voice_assistant_speech(assistant_answer)
                 print(assistant_answer)
-
-
-if __name__ == "__main__":
-
-    vAssistant = VoiceAssistant()
-
-    # configuring voice assistant data
-    vAssistant.name = "Blonde"
-    vAssistant.sex = "female"
-    vAssistant.speech_lang = "en"
-
-    # setting the default voice
-    vAssistant.setup_assistant_voice()
-
-    vAssistant.talk()

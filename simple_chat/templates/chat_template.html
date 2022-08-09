@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<div id="message-list">
+
+</div>
+
+<form method="post" id="post-form" class="">
+    {% csrf_token %}
+    <input type="text" id="message" name="message">
+    <input type="submit" id="send_message">
+</form>
+
+<script>
+    $(document).on('submit', '#post-form', function (e) {
+        e.preventDefault();
+         mes = $('#message').val();
+            send_data = {
+                "message":mes,
+                "csrfmiddlewaretoken":$('input[name=csrfmiddlewaretoken]').val()
+            };
+
+            $.ajax({
+                url:"{% url 'reload_path' %}",
+                type:"post",
+                data:send_data,
+                success: function(data){
+                    $('#message-list').append("<p  class='' >" + data['message'] + "</p>");
+                    $('#message-list').append("<p  class=''>" + data['answer'] + "</p>");
+                },
+                error: function() {
+                  alert('problem');
+                }
+            });
+    })
+</script>
+
+
+</body>
+</html>

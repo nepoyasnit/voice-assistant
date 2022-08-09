@@ -1,0 +1,28 @@
+body {
+    background: white url("images/background.jpg") no-repeat;
+}
+
+.message{
+    background-color: white;
+    color: aqua;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 1px 3px 1px;
+    width: 20%;
+}
+
+.you {
+    text-align: right;
+    margin-left: 60%;
+}
+
+.ai {
+    text-align: left;
+    margin-left: 20%;
+}
+
+.for_form {
+    margin-left: 40%;
+    margin-top: 50%;
+    width: 20%;
+    height: 5%;
+}
