@@ -3,6 +3,7 @@
 import os
 import sys
 import chat.cleaner
+import chat.neighbor_sampler
 
 
 def main():

@@ -18,9 +18,10 @@ class VoiceAssistant:
     # initializing speech recognition and input tools
     recognizer = speech_recognition.Recognizer()
     microphone = speech_recognition.Microphone()
-
     # initialization of the speech synthesis tool
     ttsEngine = pyttsx3.init()
+    # loading a neural model from disk
+    talk_model = joblib.load(r'chat/mmm_just_Alice .pkl')
 
     def assistant_answer(self, voice):
         """
@@ -28,9 +29,6 @@ class VoiceAssistant:
         """
         answer = self.talk_model.predict([voice])[0]
         return answer
-
-    # loading a neural model from disk
-    talk_model = joblib.load('C:/Users/lenovo/simple_chat/chat/model.pkl')
 
     def setup_assistant_voice(self):
         """
