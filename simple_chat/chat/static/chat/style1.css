@@ -1,0 +1,228 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Oswald', sans-serif;
+    background-image: url("img/back.jpeg");
+    background-size: cover;
+    color: white;
+    align-items: center;
+}
+
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #0e0e18, #2a3841);
+    color:white;
+}
+
+.logo{
+    text-transform: uppercase;
+    font-size: 29px;
+    font-weight: 700;
+}
+
+.project{
+    display: flex;
+    gap: 10px;
+}
+
+.project__name{
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.project__img{
+    background-color: aliceblue;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    size: cover;
+}
+
+/* Настройки */
+
+.page__settings{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings__name{
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.setting{
+    display: inline-block;
+    position: relative;
+}
+
+.settings__img{
+    width: 30px;
+    height: 30px;
+    size: cover;
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 50%;
+}
+
+.settings__btn{
+    background: none;
+    border: 0;
+}
+
+.settings__btn:hover{
+    cursor: pointer;
+}
+
+.settings-content{
+    display: none;
+    position: absolute;
+
+
+    background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.settings-content p{
+    color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.setting:hover .settings-content{
+    display: block;
+}
+
+/* Основная страница */
+.page{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
+    height: 550px;
+    width: 50%;
+    gap: 20px;
+    padding-bottom: 10px;
+    color:white;
+}
+
+.message{
+    display:flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width:100%;
+    height: max-content;
+}
+
+/* Мое */
+.my{
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 70%;
+    margin: 10px;
+}
+
+.my__message{
+    
+    align-self: center;
+    font-size: 16px;
+    font-weight: 300;
+    max-width: 80%;
+    text-align: left;
+    margin-right: 10px;
+    background: linear-gradient(to top, #353546, #627f91);
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.my__photo{
+    /* чтобы сразу не было картинки */
+   
+    /*  */
+    width: 50px;
+    height: 50px;
+    size: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Чат */
+.chat{
+    align-self: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 70%;
+    margin: 10px;
+}
+
+.chat__message{
+    
+    align-self: center;
+    font-size: 16px;
+    font-weight: 300;
+    height: auto;
+    max-width: 80%;
+    text-align: left;
+    margin-left: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    background: linear-gradient(to top, #0e0e10, #30424d);
+}
+
+.chat__photo{
+    /* чтобы сразу не было картинки */
+   
+    /*  */
+    width: 50px;
+    height: 50px;
+    size: cover;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.input{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 60%;
+}
+
+.input__text{
+    background-color: rgb(46, 57, 80);
+    width: 100%;
+    height: auto;
+    border: 0px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.input__photo{
+    size: cover;
+    border: none;
+}
+
+.btn{
+    background: none;
+    border: 0px;
+}
+
+.btn:hover{
+    cursor: pointer;
+}

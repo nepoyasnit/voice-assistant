@@ -11,9 +11,11 @@ $(document).on('submit', '#post-form', function (e) {
                 type:"post",
                 data:send_data,
                 success: function(data){
-                    $('#message-list').append("<p  class='' >" + data['message'] + "</p>");
-                    $('#message-list').append("<p  class=''>" + data['answer'] + "</p>");
-                },
+                    console.log(data['message']);
+                    console.log(data['answer']);
+                    $('#message-list').append('<p>' + data['message'] + '</p>');
+                    $('#message-list').append('<p>' + data['answer'] + '</p>');
+                    },
                 error: function() {
                   alert('problem');
                 }

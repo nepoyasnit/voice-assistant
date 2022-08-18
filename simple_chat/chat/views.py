@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from chat.assistant import VoiceAssistant
+from .assistant import VoiceAssistant
 
 voice_assistant = VoiceAssistant()
 
 
 def simple_view(request):
-    return render(request, 'chat_template.html')
+    return render(request, 'chat/index.html')
 
 
 def reload_view(request):
