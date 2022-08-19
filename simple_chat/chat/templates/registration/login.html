@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class=" col border-end  d-flex justify-content-center align-items-center">
+        <form action="{% url 'login' %}" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <a href="{% url 'password_reset' %}">forgot password?</a>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+    </div>
+{% endblock %}

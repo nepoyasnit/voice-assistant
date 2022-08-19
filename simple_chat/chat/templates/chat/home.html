@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+
+    {% if user.is_authenticated %}
+        <link rel="stylesheet" href="{% static 'chat/style1.css' %}">
+        <div class="page container">
+            <div class="message" id="message-list">
+
+            </div>
+            <form method="post" id="post-form" class="input">
+                {% csrf_token %}
+                <input type="text" id="message" name="message" class="input__text"
+                       placeholder="Введите #interface, чтобы узнать команды">
+
+                <button class="btn">
+                    <img src="{% static 'chat/img/submit.png' %}" class="input__photo">
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div class=" col border-end  d-flex justify-content-center align-items-center">
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-dark">Get started</button>
+            </a>
+        </div>
+    {% endif %}
+
+
+    <script>
+        $(document).on('submit', '#post-form', function (e) {
+            e.preventDefault();
+            mes = $('#message').val();
+            $('#post-form')[0].reset();
+            send_data = {
+                "message": mes,
+                "csrfmiddlewaretoken": $('input[name=csrfmiddlewaretoken]').val()
+            };
+
+            $.ajax({
+                url: "{% url 'home' %}",
+                type: "post",
+                data: send_data,
+                success: function (data) {
+                    if(data['message']){
+                        $('#message-list').append("<div class='my'><p class='my__message'>" + data['message'] + "</p><img class='my__photo' src='{% static "chat/img/vadim.jpg" %}'></div>");
+                        $('#message-list').append('<div class="chat"><img class="chat__photo" src="{% static 'chat/img/voice.jpg' %}"><p class="chat__message">' + data['answer'] + '</p></div>');
+                    }
+                },
+                error: function () {
+                    alert('problem');
+                }
+            });
+        })
+    </script>
+
+
+{% endblock %}
