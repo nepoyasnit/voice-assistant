@@ -7,7 +7,19 @@
         <link rel="stylesheet" href="{% static 'chat/style1.css' %}">
         <div class="page container">
             <div class="message" id="message-list">
-
+                {% for message in messages %}
+                    {% if message.is_mine %}
+                        <div class='my'>
+                            <p class='my__message'>{{ message.text }}</p>
+                            <img class='my__photo' src='{% static "chat/img/vadim.jpg" %}'>
+                        </div>
+                    {% else %}
+                        <div class="chat">
+                            <img class="chat__photo" src="{% static 'chat/img/voice.jpg' %}">
+                            <p class="chat__message">{{ message.text }} </p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
             <form method="post" id="post-form" class="input">
                 {% csrf_token %}
@@ -43,7 +55,7 @@
                 type: "post",
                 data: send_data,
                 success: function (data) {
-                    if(data['message']){
+                    if (data['message']) {
                         $('#message-list').append("<div class='my'><p class='my__message'>" + data['message'] + "</p><img class='my__photo' src='{% static "chat/img/vadim.jpg" %}'></div>");
                         $('#message-list').append('<div class="chat"><img class="chat__photo" src="{% static 'chat/img/voice.jpg' %}"><p class="chat__message">' + data['answer'] + '</p></div>');
                     }

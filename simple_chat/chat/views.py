@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
+from .models import Dialog, Message
 
 from .assistant import VoiceAssistant
 from .forms import UserCreationForm
@@ -12,13 +13,27 @@ voice_assistant = VoiceAssistant()
 class HomeView(View):
     template_name = 'chat/home.html'
 
-    def get(self, request):
+    def get(self, request):  # Decide if to create dialog or upload previous messages
+        if request.user.is_authenticated:
+            try:
+                dialog = Dialog.objects.get(user_id=request.user.id)
+            except:
+                Dialog.objects.create(user_id=request.user.id)
+            finally:
+                messages = Message.objects.filter(dialog__user_id=request.user.id).order_by('date')
+            return render(request, self.template_name, {'messages': messages})
         return render(request, self.template_name)
-    def post(self, request):
+
+    def post(self, request):  # should add messages to the dialog
+        # the user is already authenticated
+        current_dialog = Dialog.objects.get(user_id=request.user.id)
         message = request.POST['message']
+        answer = voice_assistant.assistant_answer(message)
+        Message.objects.create(text=message, dialog=current_dialog, is_mine=True)
+        Message.objects.create(text=answer, dialog=current_dialog, is_mine=False)
         result = {
             'message': message,
-            'answer': voice_assistant.assistant_answer(message),
+            'answer': answer,
         }
         return JsonResponse(result)
 
@@ -29,7 +44,6 @@ class Register(View):
     def get(self, request):
         context = {
             'form': UserCreationForm,
-
         }
         return render(request, self.template_name, context)
 
@@ -46,16 +60,3 @@ class Register(View):
             'form': form,
         }
         return render(request, self.template_name, context)
-
-# def home_view(request):
-#     return render(request, 'chat/home.html')
-#
-#
-# def reload_view(request):
-#     if request.POST:
-#         message = request.POST['message']
-#         result = {
-#             'message': message,
-#             'answer': voice_assistant.assistant_answer(message),
-#         }
-#         return JsonResponse(result)
