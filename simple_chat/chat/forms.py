@@ -5,13 +5,14 @@ from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
-class UserCreationForm(UserCreationForm):
+
+class UserCreationForm(UserCreationForm):  # overrided form which also takes an email address
     email = forms.EmailField(
         label=_("Email"),
         max_length=254,
         widget=forms.EmailInput(attrs={"autocomplete": "email"}),
     )
 
-    class Meta(UserCreationForm.Meta):
+    class Meta(UserCreationForm.Meta):  # controls the order of the fields, the model and other meta-data
         model = User
         fields = ('username', 'email')

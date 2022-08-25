@@ -8,9 +8,9 @@
         {% endif %}
 
         <form action="{% url 'register' %}" method="post">
-            <table>
-                {{ form.as_table }}
-            </table>
+
+            {{ form.as_p }}
+
             {% csrf_token %}
             <button type="submit" class="btn btn-success">submit</button>
         </form>

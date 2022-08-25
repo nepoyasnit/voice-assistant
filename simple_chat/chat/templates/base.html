@@ -44,9 +44,9 @@
         </a>
         <div class="me-2">
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Log out</a>
+                <a href="{% url 'logout' %}" style="color:white">Log out</a>
             {% else %}
-                <a href="{% url 'login' %}">Log in</a> | <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'login' %}" style="color:white">Log in</a> | <a href="{% url 'register' %}" style="color:white">Register</a>
             {% endif %}
         </div>
     </div>
@@ -62,7 +62,7 @@
 
         <ul class="nav col-md-4 justify-content-end">
             <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Technologies | About</a></li>
+            <li class="nav-item"><a href="{% url 'representation' %}" class="nav-link px-2 text-muted">Technologies | About</a></li>
         </ul>
     </footer>
 </div>

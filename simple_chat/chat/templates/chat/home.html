@@ -23,8 +23,8 @@
             </div>
             <form method="post" id="post-form" class="input">
                 {% csrf_token %}
-                <input type="text" id="message" name="message" class="input__text"
-                       placeholder="Введите #interface, чтобы узнать команды">
+                <input type="text" id="message" style="color:white" name="message" class="input__text"
+                       placeholder="Отправьте сообщение!">
 
                 <button class="btn">
                     <img src="{% static 'chat/img/submit.png' %}" class="input__photo">
