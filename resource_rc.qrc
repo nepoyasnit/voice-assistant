@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="Icons">
+    <file>resources/appIcon.png</file>
+    <file>resources/blonde.png</file>
+    <file>resources/micrioIcon.png</file>
+    <file>resources/sendIcon.png</file>
+    <file>resources/zapisIcon.png</file>
+  </qresource>
+</RCC>
