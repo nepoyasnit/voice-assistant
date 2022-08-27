@@ -3,6 +3,7 @@ from sklearn.base import BaseEstimator
 from sklearn.neighbors import BallTree
 import sys
 
+
 def softmax(x):
     proba = np.exp(-x)
     return proba / sum(proba)
