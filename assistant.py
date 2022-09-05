@@ -59,13 +59,12 @@ class Assistant:
         try:
             if wiki_page.url != "":
 
-                self.play_voice_assistant_speech("Вот, что я нашла по " + search_term + " на Wikipedia")
                 webbrowser.get().open(wiki_page.url)
 
                 # чтение ассистентом первых двух предложений summary со страницы Wikipedia
                 # (могут быть проблемы с мультиязычностью)
 
-                return "Вот, что я нашла по " + search_term + " на Wikipedia\n" + wiki_page.summary.split(".")[:2]
+                return "Вот, что я нашла по " + search_term + " на Wikipedia: "
             else:
                 # открытие ссылки на поисковик в браузере в случае, если на Wikipedia не удалось найти ничего по запросу
                 self.play_voice_assistant_speech("Не могу найти " + search_term + "на Wikipedia. /"
@@ -83,9 +82,9 @@ class Assistant:
     def answer(self, user_input_str):
         # a function that loads user input into the neural model and predicts the response
         if user_input_str.find("найди в википедии") != -1:
-            return self.wiki_search(user_input_str[18:])
+            return self.wiki_search(user_input_str[17:])
         elif user_input_str.find("найди на ютубе") != -1:
-            return self.video_search(user_input_str[18:])
+            return self.video_search(user_input_str[15:])
         else:
             answer = self.talk_model.predict([user_input_str])[0]
             return answer

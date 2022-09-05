@@ -18,7 +18,7 @@ class AssistantApp(QtWidgets.QMainWindow, mainwindow.Ui_Assistant):
             text = self.messageLine.text()
             self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "You: " + text + '\n')
             answer = self.assist.answer(text)
-            self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "Blonde: " + answer + '\n')
+            self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "Assistex: " + answer + '\n')
             self.messageLine.setText("")
             self.assist.play_voice_assistant_speech(answer)
 
@@ -27,7 +27,7 @@ class AssistantApp(QtWidgets.QMainWindow, mainwindow.Ui_Assistant):
         text = assistant.record_and_recognize_audio()
         self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "You: " + text + '\n')
         answer = self.assist.answer(text)
-        self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "Blonde: " + answer + '\n')
+        self.messageEdit.setPlainText(self.messageEdit.toPlainText() + "Assistex: " + answer + '\n')
         self.messageLine.setText("")
         self.assist.play_voice_assistant_speech(answer)
         self.voiceMessageBtn.setDisabled(False)
