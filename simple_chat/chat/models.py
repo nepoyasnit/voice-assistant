@@ -26,7 +26,7 @@ class Message(models.Model):
     """
     model for storing message in the database
     """
-    text = models.CharField(max_length=250)
+    text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     is_mine = models.BooleanField(default=True, verbose_name='user\'s message')
     dialog = models.ForeignKey(Dialog, on_delete=models.CASCADE)

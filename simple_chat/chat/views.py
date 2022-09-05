@@ -47,9 +47,7 @@ class HomeView(View):
         # get method
         message = request.POST['message']  # here we get user's message from POST request
         answer = voice_assistant.assistant_answer(message)  # get the answer on user's message
-        for text_cut in divide_string(message):  # we divide our message-string into smaller parts to fit model's
-            # requirements
-            Message.objects.create(text=text_cut, dialog=current_dialog, is_mine=True)
+        Message.objects.create(text=message, dialog=current_dialog, is_mine=True)
         Message.objects.create(text=answer, dialog=current_dialog, is_mine=False)
         result = {
             'message': message,
