@@ -135,7 +135,7 @@ class Ui_Assistant(object):
 
     def retranslateUi(self, Assistant):
         _translate = QtCore.QCoreApplication.translate
-        Assistant.setWindowTitle(_translate("Assistant", "MainWindow"))
-        self.label.setText(_translate("Assistant", "Blonde"))
+        Assistant.setWindowTitle(_translate("Assistant", "Assistant"))
+        self.label.setText(_translate("Assistant", "Assistex"))
         self.sendBtn.setShortcut(_translate("Assistant", "Return"))
 

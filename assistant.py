@@ -6,6 +6,8 @@ import joblib
 import webbrowser
 import traceback
 
+from PyQt5.QtWidgets import QMessageBox
+
 
 class Assistant:
     ttsEngine = None
@@ -90,7 +92,7 @@ class Assistant:
 
 
 def record_and_recognize_audio():
-    with speech_recognition.Microphone(device_index=1) as source:
+    with speech_recognition.Microphone(device_index=0) as source:
         r = speech_recognition.Recognizer()
         print("Speak...")
 
@@ -99,6 +101,9 @@ def record_and_recognize_audio():
             query = r.recognize_google(audio, language='ru-RU')
 
         except(speech_recognition.WaitTimeoutError, speech_recognition.UnknownValueError):
+            msg_box = QMessageBox()
+            msg_box.setText("Error! Check your micro!")
+            msg_box.exec()
             print("Error!")
 
         else:
