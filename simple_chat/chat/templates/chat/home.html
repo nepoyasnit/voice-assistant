@@ -5,7 +5,7 @@
 
     {% if user.is_authenticated %}
         <link rel="stylesheet" href="{% static 'chat/style1.css' %}">
-        <div class="page container">
+        <div class="page container" style="height: 750px">
             <div class="message" id="message-list">
                 {% for message in messages %}
                     {% if message.is_mine %}
@@ -32,11 +32,64 @@
             </form>
         </div>
     {% else %}
-        <div class=" col border-end  d-flex justify-content-center align-items-center">
-            <a href="{% url 'login' %}">
-                <button type="button" class="btn btn-dark">Get started</button>
-            </a>
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'chat/style_login.css' %}">
+        <div class=" col border-end  d-flex justify-content-center align-items-center"
+             style="display: flex; flex-direction: column">
+            <h1 style="font-size: 350%; background: linear-gradient(to right, black, grey); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;">Assistex - contribution to the future</h1>
+            <div>
+                <a href="{% url 'login' %}">
+                    <button type="button" class="btn btn-dark"
+                            style="width: 100%; padding: 10px 20px; font-size: 150%; background-color: rgb(41, 40, 40); margin: 60% 0px">
+                        Get started
+                    </button>
+                </a>
+            </div>
         </div>
+        <div class="repr container marketing ">
+
+            <!-- Three columns of text below the carousel -->
+            <div class="row">
+                <div class="col-lg-3">
+
+
+                    <h2>Maksim Konovaluk</h2>
+                    <p>Data scientist, responsible for the ai model, that predicts assistant's answers</p>
+                    <p><a class="btn btn-secondary" href="https://github.com/Maxim735"
+                          style="background-color: rgb(41, 40, 40)">GitHub profile &raquo;</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-3">
+
+
+                    <h2>Dmitry Tolstoi</h2>
+                    <p>Software developer, responsible for the desktop version of application</p>
+                    <p><a class="btn btn-secondary" href="https://github.com/westcrime"
+                          style="background-color: rgb(41, 40, 40)">GitHub profile &raquo;</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-3">
+                    <h2>Pavel Demeshkevich</h2>
+                    <p>Full-stack django developer, responsible for the django application</p>
+                    <p><a class="btn btn-secondary" href="https://github.com/PashaDem"
+                          style="background-color: rgb(41, 40, 40)">GitHub profile &raquo;</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-3">
+
+
+                    <h2>Alina Radyukevich</h2>
+                    <p>Frontend developer, responsible for pages design</p>
+                    <p><a class="btn btn-secondary" href="https://github.com/Linyshka"
+                          style="background-color: rgb(41, 40, 40)">GitHub profile &raquo;</a></p>
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+
+
+
+        <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
     {% endif %}
 
 
@@ -58,6 +111,7 @@
                     if (data['message']) {
                         $('#message-list').append("<div class='my'><p class='my__message'>" + data['message'] + "</p><img class='my__photo' src='{% static "chat/img/vadim.jpg" %}'></div>");
                         $('#message-list').append('<div class="chat"><img class="chat__photo" src="{% static 'chat/img/voice.jpg' %}"><p class="chat__message">' + data['answer'] + '</p></div>');
+                        $("#message-list").scrollTop($("#message-list")[0].scrollHeight);
                     }
                 },
                 error: function () {
@@ -66,6 +120,8 @@
             });
         })
     </script>
-
+    <script>
+        $("#message-list").scrollTop($("#message-list")[0].scrollHeight);
+    </script>
 
 {% endblock %}

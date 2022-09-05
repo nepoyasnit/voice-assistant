@@ -1,1 +1,0 @@
-web: gunicorn simple_chat.wsgi

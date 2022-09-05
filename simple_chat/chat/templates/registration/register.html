@@ -1,18 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chat/style_login.css' %}">
     <div class="col border-end  d-flex justify-content-center align-items-center">
         {% if form.errors %}
             {{ form.errors.error }}
         {% endif %}
 
         <form action="{% url 'register' %}" method="post">
-
-            {{ form.as_p }}
-
             {% csrf_token %}
-            <button type="submit" class="btn btn-success">submit</button>
+            <table>
+                <tr>
+                    <td>
+                        <label for="">Username</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.username }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Email</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.email }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Password</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.password1 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Password confirmation</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.password2 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-success" style="background-color: dimgrey">submit</button>
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </div>
 

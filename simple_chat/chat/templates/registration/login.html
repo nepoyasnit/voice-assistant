@@ -1,15 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chat/style_login.css' %}">
     <div class=" col border-end  d-flex justify-content-center align-items-center">
-        <form action="{% url 'login' %}" method="post">
-        <table>
-            {{ form.as_table }}
-        </table>
-        <a href="{% url 'password_reset' %}">forgot password?</a>
-        {% csrf_token %}
-        <button type="submit" class="btn btn-success">Submit</button>
+        <form action="{% url 'login' %}" method="post">{% csrf_token %}
+            <table>
+                <tr>
+                    <td>
+                        <label for="">Username</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.username }}
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <label for="">Password</label>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        {{ form.password }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-success" style="background-color: dimgrey">Submit</button>
+                    </td>
+                    <td style="padding: 5px 10px">
+                        <p style="text-align: center">
+                            <a href="{% url 'password_reset' %}" style="color: dimgrey; font-size: 120%; text-decoration: none">forgot password?</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
         </form>
-
     </div>
+    {% for error in form.errors %}
+        <div>
+            <p>{{ error }}</p>
+        </div>
+    {% endfor %}
+
 {% endblock %}
