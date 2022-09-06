@@ -43,6 +43,7 @@ class Ui_Assistant(object):
 "    border: 1px solid #000000;\n"
 "    border-radius: 25px;\n"
 "}")
+        Assistant.setWindowIcon(QtGui.QIcon('resources/appIcon.png'))
         self.centralwidget = QtWidgets.QWidget(Assistant)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)

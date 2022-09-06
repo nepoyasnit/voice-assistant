@@ -81,10 +81,16 @@ class Assistant:
     # function which gives an answer (string) on the message (string)
     def answer(self, user_input_str):
         # a function that loads user input into the neural model and predicts the response
-        if user_input_str.find("найди в википедии") != -1:
+        if user_input_str.find("найди в википедии") != -1 or user_input_str.find("Найди в википедии") != -1:
             return self.wiki_search(user_input_str[17:])
-        elif user_input_str.find("найди на ютубе") != -1:
+        elif user_input_str.find("найди на ютубе") != -1 or user_input_str.find("Найди на ютубе") != -1:
             return self.video_search(user_input_str[15:])
+        elif user_input_str.find("найди в ютубе") != -1 or user_input_str.find("Найди в ютубе") != -1:
+            return self.video_search(user_input_str[14:])
+        elif user_input_str.find("найди в youtube") != -1 or user_input_str.find("Найди в youtube") != -1:
+            return self.video_search(user_input_str[15:])
+        elif user_input_str.find("найди на youtube") != -1 or user_input_str.find("Найди на youtube") != -1:
+            return self.video_search(user_input_str[16:])
         else:
             answer = self.talk_model.predict([user_input_str])[0]
             return answer
@@ -104,7 +110,7 @@ def record_and_recognize_audio():
             msg_box.setText("Error! Check your micro!")
             msg_box.exec()
             print("Error!")
-
+            return "..."
         else:
             return query.capitalize()
 
