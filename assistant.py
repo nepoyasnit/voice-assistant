@@ -56,6 +56,30 @@ class Assistant:
         webbrowser.get().open(url)
         return "Вот, что я нашла по " + search_term + " в google"
 
+    def weather_search(self, *args: tuple):
+        """
+                        search for a query on YouTube and open a link with answers to the query
+                        :param args: search term
+                        """
+        if not args[0]:
+            return
+        search_term = ''.join(args[0])
+        url = "https://google.com/search?q=" + search_term
+        webbrowser.get().open(url)
+        return "Вот, что я нашла по запросу погоды в google"
+
+    def vk_(self):
+
+        url = "https://vk.com"
+        webbrowser.get().open(url)
+        return "Захожу в ВК"
+
+    def facebook_(self):
+
+        url = "https://facebook.com"
+        webbrowser.get().open(url)
+        return "Захожу в facebook"
+
     def wiki_search(self, *args: tuple):
         """
         Search in Wikipedia, followed by voicing the results and opening links
@@ -93,6 +117,26 @@ class Assistant:
     # function which gives an answer (string) on the message (string)
     def answer(self, user_input_str):
         # a function that loads user input into the neural model and predicts the response
+        if user_input_str.find("Зайди в вк") != -1 or user_input_str.find("зайди в вк") != -1:
+            return self.vk_()
+        if user_input_str.find("Зайди в vk") != -1 or user_input_str.find("зайди в vk") != -1:
+            return self.vk_()
+        if user_input_str.find("Зайди в Vk") != -1 or user_input_str.find("зайди в Vk") != -1:
+            return self.vk_()
+        if user_input_str.find("Зайди в VK") != -1 or user_input_str.find("зайди в VK") != -1:
+            return self.vk_()
+        if user_input_str.find("Зайди в вк") != -1 or user_input_str.find("зайди в вк") != -1:
+            return self.vk_()
+        if user_input_str.find("Зайди в facebook") != -1 or user_input_str.find("зайди в facebook") != -1:
+            return self.facebook_()
+        if user_input_str.find("Зайди в Facebook") != -1 or user_input_str.find("зайди в Facebook") != -1:
+            return self.facebook_()
+        if user_input_str.find("Зайди в фейсбук") != -1 or user_input_str.find("зайди в фейсбук") != -1:
+            return self.facebook_()
+        if user_input_str.find("погода в") != -1 or user_input_str.find("Погода в") != -1:
+            return self.weather_search(user_input_str[:])
+        if user_input_str.find("какая погода в") != -1 or user_input_str.find("Какая погода в") != -1:
+            return self.weather_search(user_input_str[:])
         if user_input_str.find("найди в google") != -1 or user_input_str.find("Найди в google") != -1:
             return self.google_search(user_input_str[15:])
         if user_input_str.find("найди в гугл") != -1 or user_input_str.find("Найди в гугл") != -1:
