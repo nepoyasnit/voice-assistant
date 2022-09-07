@@ -42,7 +42,19 @@ class Assistant:
         search_term = ''.join(args[0])
         url = "https://www.youtube.com/results?search_query=" + search_term
         webbrowser.get().open(url)
-        return "Вот, что я нашла по " + search_term + "на youtube"
+        return "Вот, что я нашла по " + search_term + " на youtube"
+
+    def google_search(self, *args: tuple):
+        """
+                search for a query on YouTube and open a link with answers to the query
+                :param args: search term
+                """
+        if not args[0]:
+            return
+        search_term = ''.join(args[0])
+        url = "https://google.com/search?q=" + search_term
+        webbrowser.get().open(url)
+        return "Вот, что я нашла по " + search_term + " в google"
 
     def wiki_search(self, *args: tuple):
         """
@@ -81,6 +93,12 @@ class Assistant:
     # function which gives an answer (string) on the message (string)
     def answer(self, user_input_str):
         # a function that loads user input into the neural model and predicts the response
+        if user_input_str.find("найди в google") != -1 or user_input_str.find("Найди в google") != -1:
+            return self.google_search(user_input_str[15:])
+        if user_input_str.find("найди в гугл") != -1 or user_input_str.find("Найди в гугл") != -1:
+            return self.google_search(user_input_str[13:])
+        if user_input_str.find("найди в гугле") != -1 or user_input_str.find("Найди в гугле") != -1:
+            return self.google_search(user_input_str[14:])
         if user_input_str.find("найди в википедии") != -1 or user_input_str.find("Найди в википедии") != -1:
             return self.wiki_search(user_input_str[17:])
         elif user_input_str.find("найди на ютубе") != -1 or user_input_str.find("Найди на ютубе") != -1:
