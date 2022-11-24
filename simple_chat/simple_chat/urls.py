@@ -21,4 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('chat.urls')),  # includes url mapping from the chat application
+    path('api/', include('api.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

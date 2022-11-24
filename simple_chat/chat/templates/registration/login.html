@@ -13,6 +13,7 @@
                     <td style="padding: 5px 10px">
                         {{ form.username }}
                     </td>
+
                 </tr>
                 <tr>
                     <td >
@@ -21,6 +22,7 @@
                     <td style="padding: 5px 10px">
                         {{ form.password }}
                     </td>
+
                 </tr>
                 <tr>
                     <td>
@@ -35,10 +37,13 @@
             </table>
         </form>
     </div>
-    {% for error in form.errors %}
-        <div>
-            <p>{{ error }}</p>
-        </div>
+    {% for field in form %}
+        {{ field.errors }}
     {% endfor %}
 
 {% endblock %}
+
+
+
+
+

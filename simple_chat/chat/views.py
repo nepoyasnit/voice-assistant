@@ -2,53 +2,41 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
-from django.views.generic import TemplateView
-
 from .models import Dialog, Message
-
 from .assistant import VoiceAssistant
 from .forms import UserCreationForm
 
 voice_assistant = VoiceAssistant()  # creating an instance of class-model to predict answers in HomeView.post method
 
 
-def divide_string(string):
-    """
-    function that takes a string and divides it into substrings, smaller than 250 characters
-    """
-    result = []
-    while len(string) > 250:
-        result.append(string[:250])
-        string = string[250:]
-    result.append(string)
-    return result
-
-
 class HomeView(View):
     template_name = 'chat/home.html'
 
-    def get(self, request):  # Decide if to create dialog or upload previous messages
+    def get(self, request):
+        """
+        shows messanger page if user is authenticated
+        shows login page if user is anonymous
+        """
         if request.user.is_authenticated:
-            try:  # the aim of this statement is to create or find dialog anyway
+            try:  # creates of finds dialog
                 dialog = Dialog.objects.get(user_id=request.user.id)
             except:
                 Dialog.objects.create(user_id=request.user.id)
-            finally:
-                messages = Message.objects.filter(dialog__user_id=request.user.id).order_by('date')  # this can return
-                # an empty list
-            return render(request, self.template_name, {'messages': messages})  # returning messanger page with the
-            # message history for authenticated user
-        return render(request, self.template_name)  # if user isn't authenticated, we return a default page with the
-        # link to log in
+            finally: # select related to this dialog messages
+                messages = Message.objects.filter(dialog__user_id=request.user.id).order_by('date')
+
+            return render(request, self.template_name, {'messages': messages})  # returning messanger page
+        return render(request, self.template_name)  # returning link to login
 
     def post(self, request):  # adds messages to the template
         # the user is already authenticated anyway
         current_dialog = Dialog.objects.get(user_id=request.user.id)  # the dialog is guaranted created thanks to the
         # get method
-        message = request.POST['message']  # here we get user's message from POST request
-        answer = voice_assistant.assistant_answer(message)  # get the answer on user's message
-        Message.objects.create(text=message, dialog=current_dialog, is_mine=True)
-        Message.objects.create(text=answer, dialog=current_dialog, is_mine=False)
+        message = request.POST['message']
+        answer = voice_assistant.assistant_answer(message)  # getting the answer
+        Message.objects.bulk_create([Message(text=message, dialog=current_dialog, is_mine=True),Message(text=answer, dialog=current_dialog, is_mine=False)])
+        # Message.objects.create(text=message, dialog=current_dialog, is_mine=True)
+        # Message.objects.create(text=answer, dialog=current_dialog, is_mine=False)
         result = {
             'message': message,
             'answer': answer,
